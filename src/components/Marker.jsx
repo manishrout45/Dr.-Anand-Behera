@@ -42,7 +42,8 @@ export default function Marker({
     /* ----------------------------------------------------------
        NODE
 
-       Keep the node close to the spine.
+       IMPORTANT:
+       Spine size is NOT changed.
     ---------------------------------------------------------- */
 
     const anchor = position
@@ -55,16 +56,12 @@ export default function Marker({
     /* ----------------------------------------------------------
        CONNECTOR
 
-       Starts exactly from the node.
+       Shorter because the card is now smaller.
     ---------------------------------------------------------- */
 
     const connectorStart = anchor.clone();
 
-    /*
-      Increase this if you want the box farther away.
-    */
-
-    const connectorDistance = 0.72;
+    const connectorDistance = 0.55;
 
     const connectorEnd = anchor
       .clone()
@@ -74,10 +71,7 @@ export default function Marker({
       );
 
     /* ----------------------------------------------------------
-       CYLINDER GEOMETRY
-
-       Cylinder is used instead of <Line> so the connector
-       is always clearly visible.
+       CONNECTOR GEOMETRY
     ---------------------------------------------------------- */
 
     const direction = new THREE.Vector3()
@@ -151,12 +145,6 @@ export default function Marker({
 
       {/* ========================================================
           CONNECTOR LINE
-          
-          Real 3D cylinder.
-          
-          This guarantees:
-          
-          SPINE → NODE → LINE → CARD
       ======================================================== */}
 
       <mesh
@@ -166,8 +154,8 @@ export default function Marker({
       >
         <cylinderGeometry
           args={[
-            active ? 0.012 : 0.008,
-            active ? 0.012 : 0.008,
+            active ? 0.010 : 0.007,
+            active ? 0.010 : 0.007,
             connectorLength,
             8,
           ]}
@@ -237,13 +225,7 @@ export default function Marker({
       )}
 
       {/* ========================================================
-          LABEL
-
-          IMPORTANT:
-          No "center" here.
-
-          The HTML is anchored at the connector endpoint
-          and positioned from that point.
+          LABEL / ROTATING CARD
       ======================================================== */}
 
       <Html
@@ -256,14 +238,14 @@ export default function Marker({
           pointerEvents: "none",
 
           /*
-            Prevent Drei's wrapper from changing the
-            intended left/right alignment.
+            Very small offset so the compact card
+            stays close to the connector.
           */
 
           transform:
             side > 0
-              ? "translate3d(8px, -50%, 0)"
-              : "translate3d(calc(-100% - 8px), -50%, 0)",
+              ? "translate3d(4px, -50%, 0)"
+              : "translate3d(calc(-100% - 4px), -50%, 0)",
         }}
       >
         <div
@@ -272,7 +254,6 @@ export default function Marker({
             select-none
 
             font-poppins
-
             text-left
 
             transition-opacity
@@ -287,27 +268,51 @@ export default function Marker({
         >
 
           {/* ==================================================
-              CARD
+              COMPACT ANATOMY CARD
           ================================================== */}
 
           <div
             className="
               relative
 
-              min-w-[190px]
-              max-w-[210px]
+              w-[115px]
+              min-w-[115px]
+              max-w-[115px]
 
-              rounded-xl
+              rounded-md
 
               border
               border-[#9DDBFA]
 
               bg-[#F5FAFF]
 
-              px-4
-              py-3
+              px-2
+              py-1.5
+
+              shadow-[0_3px_10px_rgba(14,90,232,0.06)]
 
               font-poppins
+
+              sm:w-[125px]
+              sm:min-w-[125px]
+              sm:max-w-[125px]
+
+              sm:px-2
+              sm:py-1.5
+
+              md:w-[135px]
+              md:min-w-[135px]
+              md:max-w-[135px]
+
+              md:px-2.5
+              md:py-2
+
+              lg:w-[155px]
+              lg:min-w-[155px]
+              lg:max-w-[155px]
+
+              lg:px-3
+              lg:py-2.5
             "
           >
 
@@ -323,7 +328,7 @@ export default function Marker({
 
                 h-full
 
-                w-[3px]
+                w-[2px]
 
                 rounded-full
 
@@ -345,15 +350,21 @@ export default function Marker({
               className="
                 font-poppins
 
-                text-[12px]
+                text-[8px]
 
                 font-semibold
 
-                leading-[1.3]
+                leading-[1.2]
 
                 tracking-[-0.01em]
 
                 text-[#082B5C]
+
+                sm:text-[8.5px]
+
+                md:text-[9px]
+
+                lg:text-[10px]
               "
             >
               {title}
@@ -366,21 +377,27 @@ export default function Marker({
             {note && (
               <div
                 className="
-                  mt-1.5
+                  mt-0.5
 
-                  max-w-[180px]
+                  w-full
 
                   whitespace-normal
 
                   font-poppins
 
-                  text-[9px]
+                  text-[6px]
 
                   font-normal
 
-                  leading-[1.45]
+                  leading-[1.3]
 
                   text-[#64748B]
+
+                  sm:text-[6.5px]
+
+                  md:text-[7px]
+
+                  lg:text-[8px]
                 "
               >
                 {note}
@@ -388,7 +405,6 @@ export default function Marker({
             )}
 
           </div>
-
         </div>
       </Html>
     </group>
