@@ -15,7 +15,9 @@ export default function ScrollSpineSection() {
     <section
       ref={containerRef}
       className="relative w-full bg-white"
-      style={{ height: "200vh" }}
+      style={{
+        height: "200vh",
+      }}
     >
       {/* =========================================================
           STICKY VIEWPORT
@@ -24,12 +26,7 @@ export default function ScrollSpineSection() {
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-white">
 
         {/* =======================================================
-            BACKGROUND / LEFT FADE
-
-            IMPORTANT:
-            z-0
-
-            It must remain BELOW the 3D canvas.
+            BACKGROUND
         ======================================================= */}
 
         <div
@@ -41,6 +38,10 @@ export default function ScrollSpineSection() {
             bg-white
           "
         />
+
+        {/* =======================================================
+            DESKTOP LEFT FADE
+        ======================================================= */}
 
         <div
           className="
@@ -70,20 +71,44 @@ export default function ScrollSpineSection() {
         {/* =======================================================
             3D SPINE
 
-            ABOVE ALL BACKGROUND FADES
+            MOBILE:
+            Starts BELOW the complete text/content section.
+
+            TABLET:
+            Uses the existing tablet positioning.
+
+            DESKTOP:
+            Original positioning preserved.
         ======================================================= */}
 
         <div
           className="
             absolute
-            inset-0
             z-[1]
+
+            /* ================= MOBILE ================= */
+
+            left-0
+            right-0
+            top-[62%]
+            h-[38%]
 
             translate-x-[8%]
 
+            /* ================= SMALL MOBILE ================= */
+
+            sm:top-[58%]
+            sm:h-[42%]
             sm:translate-x-[10%]
 
-            md:translate-x-[13%]
+            /* ================= TABLET ================= */
+
+            md:inset-0
+            md:top-0
+            md:h-full
+            md:translate-x-[10%]
+
+            /* ================= DESKTOP ================= */
 
             lg:translate-x-[17%]
 
@@ -97,9 +122,6 @@ export default function ScrollSpineSection() {
 
         {/* =======================================================
             TOP FADE
-
-            IMPORTANT:
-            BELOW THE CANVAS
         ======================================================= */}
 
         <div
@@ -121,9 +143,6 @@ export default function ScrollSpineSection() {
 
         {/* =======================================================
             BOTTOM FADE
-
-            IMPORTANT:
-            BELOW THE CANVAS
         ======================================================= */}
 
         <div
@@ -152,13 +171,13 @@ export default function ScrollSpineSection() {
             relative
             z-10
 
+            mx-auto
             flex
             h-full
             w-full
-            items-center
-
-            mx-auto
             max-w-7xl
+
+            items-start
 
             px-5
 
@@ -166,6 +185,7 @@ export default function ScrollSpineSection() {
 
             md:px-10
 
+            lg:items-center
             lg:px-14
 
             xl:px-16
@@ -175,6 +195,15 @@ export default function ScrollSpineSection() {
         >
           {/* =====================================================
               LEFT CONTENT
+
+              MOBILE:
+              Top section
+
+              TABLET:
+              Upper-left section
+
+              DESKTOP:
+              Original vertically centered layout
           ===================================================== */}
 
           <div
@@ -183,11 +212,16 @@ export default function ScrollSpineSection() {
 
               max-w-[360px]
 
+              pt-10
+
               sm:max-w-[420px]
+              sm:pt-12
 
               md:max-w-[450px]
+              md:pt-12
 
               lg:max-w-[500px]
+              lg:pt-0
 
               xl:max-w-[530px]
             "
