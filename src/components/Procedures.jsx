@@ -163,7 +163,7 @@ export default function Procedures() {
               sm:leading-7
             "
           >
-            Dr. Ananda Kumar Behera specializes in minimally invasive and
+            Dr. Anand Behera specializes in minimally invasive and
             endoscopic spine surgery, with treatment selected according to
             the patient's condition, symptoms, spinal level and individual
             needs.

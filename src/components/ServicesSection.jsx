@@ -518,7 +518,7 @@ export default function ServicesSection() {
                                 text-[#172B4D]
                               "
                             >
-                              Dr. Ananda Kumar Behera
+                              Dr. Anand Behera
                             </p>
 
                             <p

@@ -101,7 +101,7 @@ export default function AboutSection() {
             >
               <img
                 src="/assets/images/Picture1.png"
-                alt="Dr. Ananda Kumar Behera - Spine Specialist"
+                alt="Dr. Anand Behera - Spine Specialist"
                 className="
                   h-[360px]
                   w-full
@@ -266,7 +266,7 @@ export default function AboutSection() {
                   sm:text-xs
                 "
               >
-                About Dr. Ananda Kumar Behera
+                About Dr. Anand Behera
               </span>
             </div>
 
@@ -313,7 +313,7 @@ export default function AboutSection() {
                 sm:leading-7
               "
             >
-              Dr. Ananda Kumar Behera is an experienced orthopedic and spine
+              Dr. Anand Behera is an experienced orthopedic and spine
               surgeon with{" "}
               <span className="font-semibold text-[#071C3D]">
                 15 years of experience
