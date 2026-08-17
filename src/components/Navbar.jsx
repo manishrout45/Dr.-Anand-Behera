@@ -1,16 +1,70 @@
 import { Menu, X, CalendarCheck } from "lucide-react";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-const navItems = [
-  { label: "Anatomy", href: "#anatomy" },
-  { label: "Procedures", href: "#procedures" },
-  { label: "About", href: "#about" },
-  { label: "Service", href: "#services" },
-  { label: "Contact", href: "#contact" },
-];
+  const navItems = [
+    { label: "Anatomy", href: "#anatomy" },
+    { label: "Procedures", href: "#procedures" },
+    { label: "About", href: "#about" },
+    { label: "Service", href: "#services" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const handleNavClick = (href) => {
+    setIsOpen(false);
+
+    const sectionId = href.replace("#", "");
+
+    // ==========================================
+    // ALREADY ON HOMEPAGE
+    // ==========================================
+
+    if (location.pathname === "/") {
+      const element = document.getElementById(sectionId);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+        // Update hash
+        window.history.replaceState(
+          null,
+          "",
+          `#${sectionId}`
+        );
+      }
+
+      return;
+    }
+
+    // ==========================================
+    // ON SERVICE DETAILS PAGE
+    // ==========================================
+
+    window.location.href = `/#${sectionId}`;
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    if (location.pathname === "/") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      window.history.replaceState(null, "", "/");
+    } else {
+      window.location.href = "/";
+    }
+  };
 
   return (
     <header
@@ -46,8 +100,8 @@ const navItems = [
           =================================================== */}
 
           <a
-            href="#top"
-            onClick={() => setIsOpen(false)}
+            href="/"
+            onClick={handleLogoClick}
             className="
               group
               flex
@@ -55,8 +109,6 @@ const navItems = [
               gap-3
             "
           >
-
-            {/* Logo */}
 
             <div
               className="
@@ -89,8 +141,6 @@ const navItems = [
                 AB
               </span>
             </div>
-
-            {/* Name */}
 
             <div className="flex flex-col leading-none">
 
@@ -137,6 +187,10 @@ const navItems = [
               <a
                 key={item.label}
                 href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.href);
+                }}
                 className="
                   group
                   relative
@@ -151,8 +205,6 @@ const navItems = [
                 "
               >
                 {item.label}
-
-                {/* Active / Hover underline */}
 
                 <span
                   className="
@@ -179,6 +231,10 @@ const navItems = [
 
           <a
             href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick("#contact");
+            }}
             className="
               group
               hidden
@@ -211,7 +267,7 @@ const navItems = [
               "
             />
 
-            <span className="font-sans">
+            <span>
               Book Consultation
             </span>
           </a>
@@ -289,7 +345,10 @@ const navItems = [
               <a
                 key={item.label}
                 href={item.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.href);
+                }}
                 className="
                   flex
                   items-center
@@ -307,13 +366,12 @@ const navItems = [
                   hover:text-white
                 "
               >
-                <span className="font-sans">
+                <span>
                   {item.label}
                 </span>
 
                 <span
                   className="
-                    font-sans
                     text-sm
                     font-medium
                     text-[#9EDCFF]/60
@@ -324,13 +382,14 @@ const navItems = [
               </a>
             ))}
 
-            {/* ===============================================
-                MOBILE CTA
-            =============================================== */}
+            {/* MOBILE CTA */}
 
             <a
               href="#contact"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick("#contact");
+              }}
               className="
                 mt-5
                 flex
@@ -357,7 +416,7 @@ const navItems = [
                 strokeWidth={2}
               />
 
-              <span className="font-sans">
+              <span>
                 Book Consultation
               </span>
             </a>

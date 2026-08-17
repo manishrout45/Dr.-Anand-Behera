@@ -5,11 +5,11 @@ const procedures = [
     region: "Minimally Invasive",
     name: "Minimally Invasive Spine Surgery",
     description:
-      "Advanced spine procedures performed through smaller incisions and specialized approaches to reduce tissue disruption and support a smoother recovery.",
+      "Advanced spine procedures through smaller incisions and specialized approaches to reduce tissue disruption and support smoother recovery.",
   },
   {
     region: "Endoscopic",
-    name: "Endoscopic Spine Surgery",
+    name: "Advanced Endoscopic Spine Surgery",
     description:
       "A minimally invasive technique that uses an endoscope to access and treat selected spinal conditions through a small working channel.",
   },

@@ -1,68 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ArrowUpRight,
-} from "lucide-react";
-
-const services = [
-  {
-    id: 1,
-    title: "Endoscopic Spine Surgery",
-    description:
-      "Advanced endoscopic spine procedures using small access points to reduce tissue disruption and support faster recovery.",
-    image: "https://img.magnific.com/premium-photo/orthopedic-spine-surgeon-performing-surgery-spine-treat-condition-like-herniated-disc-spinal_1359741-16869.jpg?ga=GA1.1.367325703.1777638219&semt=ais_hybrid&w=740&q=80",
-  },
-  {
-    id: 2,
-    title: "Minimally Invasive Spine Surgery",
-    description:
-      "Modern spine surgery techniques designed to minimize muscle damage, blood loss and postoperative discomfort.",
-    image: "https://img.magnific.com/premium-photo/surgeons-action-highstakes-precision-operating-room_984027-223346.jpg?ga=GA1.1.367325703.1777638219&semt=ais_hybrid&w=740&q=80",
-  },
-  {
-    id: 3,
-    title: "Endoscopic Discectomy",
-    description:
-      "A minimally invasive procedure used to remove problematic disc material and relieve pressure on affected spinal nerves.",
-    image: "https://img.magnific.com/free-photo/indian-general-practitioner-patient-engage-medical-consultation_482257-124635.jpg?ga=GA1.1.367325703.1777638219&semt=ais_test_b&w=740&q=80",
-  },
-  {
-    id: 4,
-    title: "Lumbar Spine Surgery",
-    description:
-      "Specialized treatment for lumbar disc disorders, nerve compression, spinal stenosis and other lower-back conditions.",
-    image: "https://img.magnific.com/premium-photo/doctor-with-lumbar-vertebra-bone-skeleton-nerve-model-treatment-orthopedic-department_39768-17867.jpg?ga=GA1.1.367325703.1777638219&semt=ais_test_b&w=740&q=80",
-  },
-  {
-    id: 5,
-    title: "Cervical Spine Surgery",
-    description:
-      "Advanced surgical treatment for cervical disc disease, nerve compression and other conditions affecting the neck and cervical spine.",
-    image: "https://img.magnific.com/free-photo/endocrinologist-examining-throat-young-woman-clinic-women-with-thyroid-gland-test-endocrinology-hormones-treatment-inflammation-sore-throat_657921-274.jpg?ga=GA1.1.367325703.1777638219&semt=ais_test_b&w=740&q=80",
-  },
-  {
-    id: 6,
-    title: "Spinal Stenosis Treatment",
-    description:
-      "Carefully selected decompression techniques to relieve pressure on spinal nerves caused by narrowing of the spinal canal.",
-    image: "https://img.magnific.com/free-photo/female-doctor-examining-patient_1170-2113.jpg?ga=GA1.1.367325703.1777638219&semt=ais_test_b&w=740&q=80",
-  },
-  {
-    id: 7,
-    title: "Slip Disc Treatment",
-    description:
-      "Personalized treatment for herniated or slipped discs, with minimally invasive options considered when appropriate.",
-    image: "https://img.magnific.com/free-photo/analyzing-spine-structure_1098-18700.jpg?ga=GA1.1.367325703.1777638219&semt=ais_test_b&w=740&q=80",
-  },
-  {
-    id: 8,
-    title: "Spinal Decompression",
-    description:
-      "Specialized decompression procedures aimed at relieving nerve pressure while preserving as much normal spinal structure as possible.",
-    image: "https://img.magnific.com/free-photo/chiropractor-provides-aid-patient_482257-90376.jpg?ga=GA1.1.367325703.1777638219&semt=ais_test_b&w=740&q=80",
-  },
-];
+import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import services from "../data/servicesData";
 
 export default function ServicesSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -221,9 +160,6 @@ export default function ServicesSection() {
         ======================================================= */}
 
         <div className="mb-9 text-center sm:mb-11">
-
-          {/* Label */}
-
           <span
             className="
               inline-flex
@@ -234,7 +170,6 @@ export default function ServicesSection() {
               bg-[#EAF4FF]
               px-4
               py-1.5
-              font-sans
               text-xs
               font-medium
               text-[#0E5AE8]
@@ -243,12 +178,9 @@ export default function ServicesSection() {
             Specialized Spine Care
           </span>
 
-          {/* Heading */}
-
           <h2
             className="
               mt-3
-              font-sans
               text-2xl
               font-semibold
               leading-tight
@@ -263,14 +195,11 @@ export default function ServicesSection() {
             </span>
           </h2>
 
-          {/* Description */}
-
           <p
             className="
               mx-auto
               mt-3
               max-w-2xl
-              font-sans
               text-sm
               font-normal
               leading-6
@@ -282,7 +211,6 @@ export default function ServicesSection() {
             and endoscopic surgical techniques, with treatment
             tailored to each patient's condition and needs.
           </p>
-
         </div>
 
         {/* =======================================================
@@ -296,9 +224,7 @@ export default function ServicesSection() {
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
         >
-          {/* =====================================================
-              LEFT ARROW
-          ===================================================== */}
+          {/* LEFT ARROW */}
 
           <button
             type="button"
@@ -329,15 +255,10 @@ export default function ServicesSection() {
               lg:flex
             "
           >
-            <ChevronLeft
-              size={18}
-              strokeWidth={1.8}
-            />
+            <ChevronLeft size={18} strokeWidth={1.8} />
           </button>
 
-          {/* =====================================================
-              CARDS VIEWPORT
-          ===================================================== */}
+          {/* CARDS VIEWPORT */}
 
           <div className="overflow-hidden px-0.5 py-2">
             <div
@@ -356,18 +277,12 @@ export default function ServicesSection() {
               {services.map((service) => (
                 <div
                   key={service.id}
-                  className="
-                    shrink-0
-                    px-1.5
-                    sm:px-2
-                  "
+                  className="shrink-0 px-1.5 sm:px-2"
                   style={{
                     width: `${100 / visibleCards}%`,
                   }}
                 >
-                  {/* =================================================
-                      SERVICE CARD
-                  ================================================= */}
+                  {/* SERVICE CARD */}
 
                   <article
                     className="
@@ -385,9 +300,7 @@ export default function ServicesSection() {
                       hover:shadow-[0_12px_35px_rgba(14,90,232,0.10)]
                     "
                   >
-                    {/* =================================================
-                        IMAGE
-                    ================================================= */}
+                    {/* IMAGE */}
 
                     <div
                       className="
@@ -429,25 +342,21 @@ export default function ServicesSection() {
                       />
                     </div>
 
-                    {/* =================================================
-                        CARD CONTENT
-                    ================================================= */}
+                    {/* CARD CONTENT */}
 
-                    <div className="p-5 sm:p-5">
-
+                    <div className="p-5">
                       {/* TITLE */}
 
                       <h3
                         className="
                           min-h-[48px]
-                          font-sans
                           text-[18px]
                           font-semibold
                           leading-6
                           text-[#071C3D]
                         "
                       >
-                        {service.title}
+                        {service.shortTitle}
                       </h3>
 
                       {/* DESCRIPTION */}
@@ -457,7 +366,6 @@ export default function ServicesSection() {
                           mt-2.5
                           line-clamp-3
                           min-h-[60px]
-                          font-sans
                           text-[13px]
                           font-normal
                           leading-5
@@ -484,9 +392,6 @@ export default function ServicesSection() {
                         {/* DOCTOR */}
 
                         <div className="flex items-center gap-2.5">
-
-                          {/* Avatar */}
-
                           <div
                             className="
                               flex
@@ -497,7 +402,6 @@ export default function ServicesSection() {
                               justify-center
                               rounded-full
                               bg-[#EAF4FF]
-                              font-sans
                               text-[10px]
                               font-semibold
                               text-[#0E5AE8]
@@ -506,12 +410,9 @@ export default function ServicesSection() {
                             AB
                           </div>
 
-                          {/* Doctor Information */}
-
                           <div>
                             <p
                               className="
-                                font-sans
                                 text-[12px]
                                 font-semibold
                                 leading-4
@@ -524,7 +425,6 @@ export default function ServicesSection() {
                             <p
                               className="
                                 mt-0.5
-                                font-sans
                                 text-[10px]
                                 font-normal
                                 leading-4
@@ -534,19 +434,17 @@ export default function ServicesSection() {
                               Spine Surgeon
                             </p>
                           </div>
-
                         </div>
 
                         {/* LEARN MORE */}
 
-                        <a
-                          href="#contact"
+                        <Link
+                          to={`/services/${service.slug}`}
                           className="
                             flex
                             shrink-0
                             items-center
                             gap-1
-                            font-sans
                             text-[12px]
                             font-semibold
                             text-[#0E5AE8]
@@ -567,8 +465,7 @@ export default function ServicesSection() {
                               group-hover:-translate-y-0.5
                             "
                           />
-                        </a>
-
+                        </Link>
                       </div>
                     </div>
                   </article>
@@ -577,9 +474,7 @@ export default function ServicesSection() {
             </div>
           </div>
 
-          {/* =====================================================
-              RIGHT ARROW
-          ===================================================== */}
+          {/* RIGHT ARROW */}
 
           <button
             type="button"
@@ -610,10 +505,7 @@ export default function ServicesSection() {
               lg:flex
             "
           >
-            <ChevronRight
-              size={18}
-              strokeWidth={1.8}
-            />
+            <ChevronRight size={18} strokeWidth={1.8} />
           </button>
         </div>
 
@@ -631,8 +523,6 @@ export default function ServicesSection() {
             lg:hidden
           "
         >
-          {/* Previous */}
-
           <button
             type="button"
             onClick={handlePrevious}
@@ -655,8 +545,6 @@ export default function ServicesSection() {
           >
             <ChevronLeft size={16} />
           </button>
-
-          {/* Dots */}
 
           <div className="flex items-center gap-1.5">
             {Array.from({ length: totalSlides }).map(
@@ -681,8 +569,6 @@ export default function ServicesSection() {
               )
             )}
           </div>
-
-          {/* Next */}
 
           <button
             type="button"
@@ -744,7 +630,6 @@ export default function ServicesSection() {
             )
           )}
         </div>
-
       </div>
     </section>
   );
