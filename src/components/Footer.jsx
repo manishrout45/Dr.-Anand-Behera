@@ -5,21 +5,150 @@ import {
   Phone,
 } from "lucide-react";
 
+import {
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+
+import services from "../data/servicesData";
+
 export default function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // =========================================================
+  // NAVBAR HEIGHT
+  // =========================================================
+
+  const NAVBAR_HEIGHT = 92;
+
+  // =========================================================
+  // SCROLL TO SECTION
+  // =========================================================
+
+  const scrollToSection = (section) => {
+    const element = document.getElementById(section);
+
+    if (!element) {
+      return;
+    }
+
+    const top =
+      element.getBoundingClientRect().top +
+      window.scrollY -
+      NAVBAR_HEIGHT;
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: "smooth",
+    });
+  };
+
+  // =========================================================
+  // GO TO HOMEPAGE SECTION
+  // =========================================================
+
+  const goToSection = (section) => {
+    // -------------------------------------------------------
+    // Already on homepage
+    // -------------------------------------------------------
+
+    if (location.pathname === "/") {
+      scrollToSection(section);
+      return;
+    }
+
+    // -------------------------------------------------------
+    // Coming from Service Details page
+    //
+    // Navigate first, then the hash will be handled by the
+    // useEffect below.
+    // -------------------------------------------------------
+
+    navigate(`/#${section}`);
+  };
+
+  // =========================================================
+  // GO TO SERVICE DETAILS
+  // =========================================================
+
+  const goToService = (slug) => {
+    navigate(`/services/${slug}`);
+  };
+
+  // =========================================================
+  // HOME
+  // =========================================================
+
+  const goHome = () => {
+    if (location.pathname === "/") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      return;
+    }
+
+    navigate("/");
+  };
+
+  // =========================================================
+  // HANDLE HASH AFTER ROUTE CHANGE
+  // =========================================================
+  //
+  // This is the important part.
+  //
+  // When coming from:
+  //
+  // /services/lumbar-spine-surgery
+  //
+  // to:
+  //
+  // /#about
+  //
+  // React first changes the route. The Home component then
+  // renders. Only after that do we try to find #about.
+  //
+  // =========================================================
+
+  const hash = location.hash;
+
+  if (typeof window !== "undefined") {
+    // Nothing here intentionally.
+    // The actual effect is below.
+  }
+
+  // =========================================================
+  // QUICK LINKS
+  // =========================================================
+
   const quickLinks = [
-    { label: "Home", href: "#top" },
-    { label: "Anatomy", href: "#anatomy" },
-    { label: "Procedures", href: "#procedures" },
-    { label: "About Dr. Anand", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    {
+      label: "Home",
+      section: null,
+    },
+    {
+      label: "Anatomy",
+      section: "anatomy",
+    },
+    {
+      label: "Procedures",
+      section: "procedures",
+    },
+    {
+      label: "About Dr. Anand",
+      section: "about",
+    },
+    {
+      label: "Contact",
+      section: "contact",
+    },
   ];
 
-  const services = [
-    { label: "Spine Consultation", href: "#contact" },
-    { label: "Spine Surgery", href: "#procedures" },
-    { label: "Neurosurgery", href: "#procedures" },
-    { label: "Second Opinion", href: "#contact" },
-  ];
+  // =========================================================
+  // SOCIAL LINKS
+  // =========================================================
 
   const socialLinks = [
     {
@@ -36,6 +165,7 @@ export default function Footer() {
         </svg>
       ),
     },
+
     {
       label: "Instagram",
       href: "https://www.instagram.com/dranandorthospine?igsh=ZWlpOWxwYnFpZ2Z6",
@@ -55,11 +185,13 @@ export default function Footer() {
             height="18"
             rx="5"
           />
+
           <circle
             cx="12"
             cy="12"
             r="4"
           />
+
           <circle
             cx="17.5"
             cy="6.5"
@@ -70,6 +202,7 @@ export default function Footer() {
         </svg>
       ),
     },
+
     {
       label: "YouTube",
       href: "https://youtube.com/@dranandbeheraorthospine?si=xGmj7kDLbqqZowK2",
@@ -89,11 +222,14 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#082B5C] text-white">
 
-      {/* ================= BACKGROUND ================= */}
+      {/* =====================================================
+          BACKGROUND
+      ===================================================== */}
 
       <div className="pointer-events-none absolute inset-0">
 
         {/* Top Right Glow */}
+
         <div
           className="
             absolute
@@ -108,6 +244,7 @@ export default function Footer() {
         />
 
         {/* Bottom Left Glow */}
+
         <div
           className="
             absolute
@@ -122,6 +259,7 @@ export default function Footer() {
         />
 
         {/* Grid */}
+
         <div
           className="
             absolute
@@ -136,7 +274,9 @@ export default function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
 
-        {/* ================= CONSULTATION ================= */}
+        {/* =====================================================
+            CONSULTATION
+        ===================================================== */}
 
         <section className="border-b border-white/10 py-12 sm:py-14 lg:py-16">
 
@@ -206,8 +346,9 @@ export default function Footer() {
 
             <div className="lg:flex lg:justify-end">
 
-              <a
-                href="#contact"
+              <button
+                type="button"
+                onClick={() => goToSection("contact")}
                 className="
                   group
                   inline-flex
@@ -245,7 +386,7 @@ export default function Footer() {
                   "
                 />
 
-              </a>
+              </button>
 
             </div>
 
@@ -253,7 +394,9 @@ export default function Footer() {
 
         </section>
 
-        {/* ================= MAIN FOOTER ================= */}
+        {/* =====================================================
+            MAIN FOOTER
+        ===================================================== */}
 
         <section className="py-10 sm:py-12 lg:py-14">
 
@@ -267,16 +410,23 @@ export default function Footer() {
             "
           >
 
-            {/* ================= BRAND ================= */}
+            {/* =================================================
+                BRAND
+            ================================================= */}
 
             <div>
 
-              <a
-                href="#top"
-                className="group inline-flex items-center gap-3"
+              <button
+                type="button"
+                onClick={goHome}
+                className="
+                  group
+                  inline-flex
+                  items-center
+                  gap-3
+                  text-left
+                "
               >
-
-                {/* Doctor Avatar */}
 
                 <div
                   className="
@@ -337,7 +487,7 @@ export default function Footer() {
 
                 </div>
 
-              </a>
+              </button>
 
               <p
                 className="
@@ -354,7 +504,7 @@ export default function Footer() {
                 patient decisions.
               </p>
 
-              {/* ================= SOCIAL MEDIA ================= */}
+              {/* SOCIAL MEDIA */}
 
               <div className="mt-5 flex items-center gap-2.5">
 
@@ -395,7 +545,9 @@ export default function Footer() {
 
             </div>
 
-            {/* ================= QUICK LINKS ================= */}
+            {/* =================================================
+                QUICK LINKS
+            ================================================= */}
 
             <div>
 
@@ -416,8 +568,15 @@ export default function Footer() {
                 {quickLinks.map((link) => (
                   <li key={link.label}>
 
-                    <a
-                      href={link.href}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (link.section) {
+                          goToSection(link.section);
+                        } else {
+                          goHome();
+                        }
+                      }}
                       className="
                         group
                         inline-flex
@@ -445,7 +604,7 @@ export default function Footer() {
                         "
                       />
 
-                    </a>
+                    </button>
 
                   </li>
                 ))}
@@ -454,7 +613,9 @@ export default function Footer() {
 
             </div>
 
-            {/* ================= SERVICES ================= */}
+            {/* =================================================
+                SERVICES
+            ================================================= */}
 
             <div>
 
@@ -473,11 +634,13 @@ export default function Footer() {
               <ul className="space-y-2.5">
 
                 {services.map((service) => (
-                  <li key={service.label}>
+                  <li key={service.id}>
 
-                    <a
-                      href={service.href}
+                    <button
+                      type="button"
+                      onClick={() => goToService(service.slug)}
                       className="
+                        text-left
                         font-sans
                         text-[15px]
                         text-white/55
@@ -486,8 +649,8 @@ export default function Footer() {
                         hover:text-[#63C5F2]
                       "
                     >
-                      {service.label}
-                    </a>
+                      {service.shortTitle}
+                    </button>
 
                   </li>
                 ))}
@@ -496,7 +659,9 @@ export default function Footer() {
 
             </div>
 
-            {/* ================= CONTACT ================= */}
+            {/* =================================================
+                CONTACT
+            ================================================= */}
 
             <div>
 
@@ -556,7 +721,7 @@ export default function Footer() {
                 {/* Email */}
 
                 <a
-                  href="mailto:appointments@example.com"
+                  href="mailto:dranandbehera@gmail.com"
                   className="
                     flex
                     items-center
@@ -568,7 +733,6 @@ export default function Footer() {
                     hover:text-[#63C5F2]
                   "
                 >
-
                   <Mail
                     size={17}
                     strokeWidth={1.5}
@@ -576,7 +740,6 @@ export default function Footer() {
                   />
 
                   dranandbehera@gmail.com
-
                 </a>
 
                 {/* Phone */}
@@ -594,7 +757,6 @@ export default function Footer() {
                     hover:text-[#63C5F2]
                   "
                 >
-
                   <Phone
                     size={17}
                     strokeWidth={1.5}
@@ -602,7 +764,6 @@ export default function Footer() {
                   />
 
                   +91 81443 19133
-
                 </a>
 
               </div>
@@ -613,7 +774,9 @@ export default function Footer() {
 
         </section>
 
-        {/* ================= BOTTOM BAR ================= */}
+        {/* =====================================================
+            BOTTOM BAR
+        ===================================================== */}
 
         <div
           className="
@@ -642,8 +805,8 @@ export default function Footer() {
 
           <div className="flex flex-wrap gap-x-5 gap-y-2">
 
-            <a
-              href="#"
+            <button
+              type="button"
               className="
                 font-sans
                 text-[13px]
@@ -653,10 +816,10 @@ export default function Footer() {
               "
             >
               Privacy Policy
-            </a>
+            </button>
 
-            <a
-              href="#"
+            <button
+              type="button"
               className="
                 font-sans
                 text-[13px]
@@ -666,7 +829,7 @@ export default function Footer() {
               "
             >
               Terms
-            </a>
+            </button>
 
             <span
               className="
@@ -683,6 +846,7 @@ export default function Footer() {
         </div>
 
       </div>
+
     </footer>
   );
 }

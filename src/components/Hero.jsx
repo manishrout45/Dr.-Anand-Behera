@@ -63,41 +63,35 @@ export default function Hero() {
 
 
             {/* Heading */}
-
             <h1 className="mt-8 text-5xl font-light leading-[1] tracking-tight md:text-6xl xl:text-7xl">
-
               Expert Care
 
               <span className="mt-2 block font-black text-white drop-shadow-xl">
-
-                For Every Bone
-
+                For Your Spine
               </span>
 
               <span className="mt-2 block font-bold text-[#082B5C]">
-
-                & Joint
-
+                & Better Movement
               </span>
-
             </h1>
 
             {/* Description */}
-
             <p className="mx-auto mt-8 max-w-xl text-lg leading-9 text-white/85 lg:mx-0">
-
-              Experience world-class orthopedic care with advanced diagnostics,
-              minimally invasive surgeries, sports injury treatments, joint
-              replacement, and personalized rehabilitation—helping you recover
-              faster and return to the life you love.
-
+              Comprehensive spine care backed by advanced diagnostics, modern surgical
+              techniques, minimally invasive procedures, and personalized rehabilitation—
+              helping you overcome spinal conditions, reduce pain, and get back to the
+              life you love.
             </p>
 
             {/* CTA Buttons */}
 
-           <div className="relative z-[100] mt-12 flex flex-col gap-5 sm:flex-row sm:justify-center lg:justify-start">
+<div className="relative z-[100] mt-12 flex flex-col gap-5 sm:flex-row sm:justify-center lg:justify-start">
 
+  {/* Book Appointment */}
   <button
+    onClick={() => {
+      window.location.href = "tel:+918144319133";
+    }}
     className="
       group
       relative
@@ -127,7 +121,14 @@ export default function Hero() {
     Book Appointment
   </button>
 
+  {/* Explore Services */}
   <button
+    onClick={() => {
+      document.getElementById("services")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }}
     className="
       group
       relative
@@ -160,7 +161,6 @@ export default function Hero() {
   </button>
 
 </div>
-
       
 
             </div> 
